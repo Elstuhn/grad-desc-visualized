@@ -79,6 +79,6 @@ function replacemetrics(x, f, fprime) {
 async function visualize(f, fprime, points) {
     for (var i = 0; i < points.length; i+=15) {
         replacemetrics(points[i], f, fprime);
-        await sleep(200);
+        await sleep(150);
     }
 }
