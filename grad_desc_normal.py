@@ -85,7 +85,10 @@ def grad_desc(x : float, func : str, lr : float = 3e-4, threshold : float = 1e-5
     fprimed = sympy.diff(func)
     fprime = sympy.sympify(fprimed)
     fprime = sympy.lambdify(X, fprime)
-    while fprime(x) > threshold: #careful of saddle points
+    while any([
+        fprime(x) > 0+threshold,
+        fprime(x) < 0-threshold
+    ]): #careful of saddle points
         x -= fprime(x)*lr
         points.append(x)
         

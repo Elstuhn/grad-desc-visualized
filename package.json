@@ -11,5 +11,8 @@
     "url": "grad-desc"
   },
   "author": "Elston",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mathjs": "^10.6.4"
+  }
 }
