@@ -1,0 +1,46 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://www.desmos.com/api/v1.7/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+        <script src="../static/index.js"></script>
+        <link href="../static/index.css" rel="stylesheet">
+    </head>
+    <body>
+        <element onload="startserver"></element>
+        <div id="all">
+            <section id="buttons">
+                <button type="button" class="button" onclick="getResult()">Visualise!</button>
+                <br><br>
+                <label for="poly">Enter your cost function:</label>
+                <input type="text" id="poly" name="poly" value="x^2+3x+2" placeholder="x^2+3x+2" required>
+                <br><br>
+                <h3>Configurations</h3>
+                <br>
+                <label for="x">Enter your starting x point:</label>
+                <input type="text" id="x" name="x" value="1" placeholder="1" required>
+                <br>
+                <label for="lr">Enter the learning rate:</label>
+                <input type="text" id="lr" name="lr" value="3e-4" placeholder="3e-4" required>
+                <br>
+                <label for="th">Enter the threshold:</label>
+                <input type="text" id="th" name="th" value="1e-5" placeholder="1e-5" required>
+                <br><br>
+                <section id="metrics">
+                    <p id="xvalue">x value: </p>
+                    <p id="grad">gradient: </p>
+                </section>
+
+            </section>
+            <div id="calculator" style="width: 1100px; height: 800px;"></div>
+    
+            <script>
+                main();
+            </script>
+        </div>
+    </body>
+</html>
