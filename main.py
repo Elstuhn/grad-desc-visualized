@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, session
 import sys
 import typing as t
 
-sys.path.append('C:\\Users\\elsto\\downloads\python\\test website\\gradient_descent')
 from grad_desc_normal import *
 
 app = Flask(__name__)
