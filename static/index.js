@@ -1,5 +1,5 @@
 const sleep = async ms => new Promise(resolve=>setTimeout(resolve,ms));
-
+var flag = true;
 
 function unsympy(f) {
     return f.replaceAll("**", "^");
@@ -7,7 +7,6 @@ function unsympy(f) {
 
 function getgrad(x, fprime) {
     fprime = unsympy(fprime);
-    console.log("fprime unsympyed", fprime)
     return math.evaluate(fprime.replaceAll("x", x));
     //return eval(fprime.replaceAll("x", x));
 }
@@ -19,6 +18,7 @@ function gety(x, f) {
 
 
 function getResult() {
+    flag = false;
     func = document.getElementById("poly").value;
     x = document.getElementById("x").value;
     lr = document.getElementById("lr").value;
@@ -32,10 +32,15 @@ function getResult() {
             console.log(msg);
         }*/
     }).done((msg, status, jqXHR) => {
+        if (!msg.status) {
+            document.getElementById("error").innerHTML = msg.error;
+            return;
+        }
         points = msg.points;
         fprime = msg.fprime;
         f = msg.f;
         setgraph(f);
+        flag = true;
         visualize(f, fprime, points);
     })
 }
@@ -78,16 +83,19 @@ function replacemetrics(x, f, fprime) {
     y = gety(x, f);
     grad = getgrad(x, fprime);
     c = y-(grad*x);
-    console.log(f, fprime);
-    console.log(y, grad, c);
     calculator.setExpression({id: 'graph2', latex: `${grad}x+${c}`})
     document.getElementById("xvalue").innerHTML = `x value: ${x}`;
     document.getElementById("grad").innerHTML = `gradient: ${grad}`;
 }
 
 async function visualize(f, fprime, points) {
-    for (var i = 0; i < points.length; i+=15) {
+    document.getElementById("finished").innerHTML = "";
+    document.getElementById("error").innerHTML = "";
+    let i = 0;
+    while (flag && i < points.length) {
         replacemetrics(points[i], f, fprime);
         await sleep(60);
+        i += 15
     }
+    document.getElementById("finished").innerHTML = "finished";
 }

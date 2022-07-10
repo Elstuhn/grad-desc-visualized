@@ -16,9 +16,12 @@ def answer():
         data = request.data 
         data = data.decode("utf-8")
         data = eval(data)
-        f, fprime, points = grad_desc(*[data[i] for i in data])
+        try:
+            f, fprime, points = grad_desc(*[data[i] for i in data])
+        except Exception as e:
+            return {"status" : 0, "error": f"{type(e)} {e}"}
         fprime = str(fprime)
-        return {"f": f, "fprime": fprime, "points": points}
+        return {"f": f, "fprime": fprime, "points": points, "status": 1}
     else:
         pass
     

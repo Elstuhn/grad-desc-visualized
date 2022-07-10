@@ -30,3 +30,7 @@ body {
     box-shadow: 0 1px #999;
     transform: translateY(2px);
 }
+
+#metrics {
+    font-weight: bold;
+}
